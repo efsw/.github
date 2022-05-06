@@ -65,13 +65,14 @@ jobs:
       cloudformation_stack_name: ${{ steps.resource_names_generation.outputs.cloudformation_stack_name }}
       microservice_cloudformation_stack_lifecycle_artifact_name: ${{ steps.resource_names_generation.outputs.microservice_cloudformation_stack_lifecycle_artifact_name }}
       project_distribution_artifact_name: ${{ steps.resource_names_generation.outputs.project_distribution_artifact_name }}
+      distribution_name_hash: ${{ steps.resource_names_generation.outputs.distribution_name_hash }}
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v2
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - id: resource_names_generation
@@ -96,7 +97,7 @@ jobs:
   #     - uses: actions/checkout@v2
   #       with:
   #         repository: efsw/syllograph
-  #         ref: develop
+  #         ref: v1.1.0
   #         token: ${{ secrets.EFSW_GITHUB_TOKEN }}
   #         path: syllograph
   #     - name: Building the source code of the microservices and uploading the artifacts
@@ -117,7 +118,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - name: Setting up the AWS CLI
@@ -139,6 +140,7 @@ jobs:
           project_artifacts_bucket_name: ${{ needs.generate-resources-names.outputs.project_artifacts_bucket_name }}
           cloudformation_bucket_name: ${{ needs.generate-resources-names.outputs.cloudformation_bucket_name }}
           cloudformation_stack_name: ${{ needs.generate-resources-names.outputs.cloudformation_stack_name }}
+          distribution_name_hash: ${{ needs.generate-resources-names.outputs.distribution_name_hash }}
           # microservice_cloudformation_stack_lifecycle_artifact_name: ${{ needs.generate-resources-names.outputs.microservice_cloudformation_stack_lifecycle_artifact_name }}
 
   
@@ -151,7 +153,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - name: Setting up the NodeJS environment
@@ -175,7 +177,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - name: Setting up the NodeJS environment
@@ -200,7 +202,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - name: Building the source code of the project and uploading the artifacts
@@ -223,7 +225,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - name: Downloading the generated artifacts of the project
@@ -250,7 +252,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: efsw/syllograph
-          ref: develop
+          ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
       - name: Setting up the AWS CLI
