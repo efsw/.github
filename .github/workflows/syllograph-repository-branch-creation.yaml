@@ -87,31 +87,11 @@ jobs:
           branch_name_abbreviation_length: ${{ inputs.branch_name_abbreviation_length }}
           timezone: ${{ inputs.timezone }}
 
-  # build-microservices-sourcecode:
-  #   name: Building the source code of the microservices
-  #   needs: generate-resources-names
-  #   runs-on: ubuntu-18.04
-  #   steps:
-  #     - name: Cloning the repository
-  #       uses: actions/checkout@v2
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         repository: efsw/syllograph
-  #         ref: v1.1.0
-  #         token: ${{ secrets.EFSW_GITHUB_TOKEN }}
-  #         path: syllograph
-  #     - name: Building the source code of the microservices and uploading the artifacts
-  #       uses: ./syllograph/.github/actions/syllograph-build-microservices
-  #       with:
-  #         efsw_github_token: ${{ secrets.EFSW_GITHUB_TOKEN }}
-  #         microservice_cloudformation_stack_lifecycle_artifact_name: ${{ needs.generate-resources-names.outputs.microservice_cloudformation_stack_lifecycle_artifact_name }}
-
   deploy-cloudformation-stack:
     name: Deploying of the AWS Cloudformation stack
     runs-on: ubuntu-18.04
     needs:
       - generate-resources-names
-      # - build-microservices-sourcecode
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v2
@@ -132,17 +112,12 @@ jobs:
         with:
           efsw_github_token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           organization_name: ${{ needs.generate-resources-names.outputs.organization_name }}
-          organization_name_abbreviation: ${{ needs.generate-resources-names.outputs.organization_name_abbreviation }}
           product_name: ${{ needs.generate-resources-names.outputs.product_name }}
-          product_name_abbreviation: ${{ needs.generate-resources-names.outputs.product_name_abbreviation }}
           branch_name: ${{ needs.generate-resources-names.outputs.branch_name }}
-          branch_name_abbreviation: ${{ needs.generate-resources-names.outputs.branch_name_abbreviation }}
           project_artifacts_bucket_name: ${{ needs.generate-resources-names.outputs.project_artifacts_bucket_name }}
           cloudformation_bucket_name: ${{ needs.generate-resources-names.outputs.cloudformation_bucket_name }}
           cloudformation_stack_name: ${{ needs.generate-resources-names.outputs.cloudformation_stack_name }}
           distribution_name_hash: ${{ needs.generate-resources-names.outputs.distribution_name_hash }}
-          # microservice_cloudformation_stack_lifecycle_artifact_name: ${{ needs.generate-resources-names.outputs.microservice_cloudformation_stack_lifecycle_artifact_name }}
-
   
   lint-project-sourcecode:
     name: Linting the source code of the project
