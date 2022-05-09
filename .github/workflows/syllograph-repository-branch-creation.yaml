@@ -111,9 +111,12 @@ jobs:
         uses: ./syllograph/.github/actions/syllograph-deploy-cloudformation-templates
         with:
           efsw_github_token: ${{ secrets.EFSW_GITHUB_TOKEN }}
-          organization_name: ${{ needs.generate-resources-names.outputs.organization_name }}
-          product_name: ${{ needs.generate-resources-names.outputs.product_name }}
+          organization_name: ${{ inputs.organization_name }}
+          product_name: ${{ inputs.product_name }}
           branch_name: ${{ needs.generate-resources-names.outputs.branch_name }}
+          plugin_name: ${{ needs.generate-resources-names.outputs.plugin_name }}
+          environment_name: ${{ needs.generate-resources-names.outputs.environment_name }}
+          branch_type: ${{ needs.generate-resources-names.outputs.branch_type }}
           project_artifacts_bucket_name: ${{ needs.generate-resources-names.outputs.project_artifacts_bucket_name }}
           cloudformation_bucket_name: ${{ needs.generate-resources-names.outputs.cloudformation_bucket_name }}
           cloudformation_stack_name: ${{ needs.generate-resources-names.outputs.cloudformation_stack_name }}
