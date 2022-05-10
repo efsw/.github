@@ -192,3 +192,21 @@ jobs:
         with:
           efsw_github_token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           cloudformation_stack_name: ${{ needs.generate-resources-names.outputs.cloudformation_stack_name }}
+
+  purging-artifacts:
+    name: Purging the generated artifacts
+    needs: [generate-resources-names, upload-project-artifacts]
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cloning the repository
+        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: efsw/syllograph
+          ref: v1.1.0
+          token: ${{ secrets.EFSW_GITHUB_TOKEN }}
+          path: syllograph
+      - name: Setting up the AWS CLI
+        uses: ./syllograph/.github/actions/syllograph-purge-artifacts
+        with:
+          project_distribution_artifact_name: ${{ needs.generate-resources-names.outputs.project_distribution_artifact_name }}
