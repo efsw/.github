@@ -15,18 +15,6 @@ on:
         type: boolean
         default: false
         required: false
-      organization_name_abbreviation_length:
-        type: string
-        required: false
-        default: 6
-      product_name_abbreviation_length:
-        type: string
-        required: false
-        default: 6
-      branch_name_abbreviation_length:
-        type: string
-        required: false
-        default: 15
       timezone:
         type: string
         required: false
@@ -56,9 +44,6 @@ jobs:
       branch_type: ${{ steps.resource_names_generation.outputs.branch_type }}
       branch_name: ${{ steps.resource_names_generation.outputs.branch_name }}
       environment_name: ${{ steps.resource_names_generation.outputs.environment_name }}
-      branch_name_abbreviation: ${{ steps.resource_names_generation.outputs.branch_name_abbreviation }}
-      product_name_abbreviation: ${{ steps.resource_names_generation.outputs.product_name_abbreviation }}
-      organization_name_abbreviation: ${{ steps.resource_names_generation.outputs.organization_name_abbreviation }}
       plugin_target_reference_name: ${{ steps.resource_names_generation.outputs.plugin_target_reference_name }}
       project_artifacts_bucket_name: ${{ steps.resource_names_generation.outputs.project_artifacts_bucket_name }}
       cloudformation_bucket_name: ${{ steps.resource_names_generation.outputs.cloudformation_bucket_name }}
@@ -81,9 +66,6 @@ jobs:
           efsw_github_token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           organization_name: ${{ inputs.organization_name }}
           product_name: ${{ inputs.product_name }}
-          organization_name_abbreviation_length: ${{ inputs.organization_name_abbreviation_length }}
-          product_name_abbreviation_length: ${{ inputs.product_name_abbreviation_length }}
-          branch_name_abbreviation_length: ${{ inputs.branch_name_abbreviation_length }}
           timezone: ${{ inputs.timezone }}
 
   lint-project-sourcecode:
