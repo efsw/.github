@@ -14,7 +14,7 @@ on:
       region:
         type: string
         required: false
-        default: eu-central-1
+        default: us-east-1
     secrets:
       AWS_SYLLOGRAPH_ROLE_ARN:
         required: true

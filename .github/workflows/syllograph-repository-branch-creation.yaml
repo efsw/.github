@@ -21,7 +21,7 @@ on:
         required: false
       region:
         type: string
-        default: eu-central-1
+        default: us-east-1
         required: false
     secrets:
       AWS_SYLLOGRAPH_ROLE_ARN:
@@ -240,7 +240,8 @@ jobs:
           ref: v1.1.0
           token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           path: syllograph
-      - name: Setting up the AWS CLI
+      - name: Purging the artifacts
         uses: ./syllograph/.github/actions/syllograph-purge-artifacts
         with:
+          efsw_github_token: ${{ secrets.EFSW_GITHUB_TOKEN }}
           project_distribution_artifact_name: ${{ needs.generate-resources-names.outputs.project_distribution_artifact_name }}
