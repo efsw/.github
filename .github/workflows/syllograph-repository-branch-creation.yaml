@@ -36,8 +36,6 @@ on:
         required: true
       SSH_PRIVATE_KEYS:
         required: true
-      EFSW_NPM_GITHUB_REGISTRY_TOKEN:
-        required: true
 
 permissions:
   id-token: write
