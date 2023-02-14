@@ -63,12 +63,12 @@ jobs:
       - uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-      - uses: actions/checkout@v3
-        with:
-          repository: efsw/efsw.syllograph
-          ref: v1.1.0
-          path: syllograph
-      # - run: git clone git+ssh://git@github.com/efsw/efsw.syllograph syllograph --branch v1.1.0 --single-branch
+      # - uses: actions/checkout@v3
+      #   with:
+      #     repository: efsw/efsw.syllograph
+      #     ref: v1.1.0
+      #     path: syllograph
+      - run: git clone git+ssh://git@github.com/efsw/efsw.syllograph syllograph --branch v1.1.0 --single-branch
       - id: resource_names_generation
         name: Computing the names of the resources
         uses: ./syllograph/.github/actions/syllograph-generate-resources-names
