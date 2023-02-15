@@ -40,13 +40,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - id: resource_names_generation
         name: Computing the names of the resources
         uses: ./syllograph/.github/actions/syllograph-generate-resources-names
@@ -63,13 +64,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Setting up the AWS CLI
         uses: ./syllograph/.github/actions/syllograph-setup-aws-cli
         with:

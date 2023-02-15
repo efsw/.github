@@ -68,7 +68,6 @@ jobs:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-      # - run: git clone git@github.com/efsw/efsw.syllograph syllograph --branch v1.1.0 --single-branch
       - id: resource_names_generation
         name: Computing the names of the resources
         uses: ./syllograph/.github/actions/syllograph-generate-resources-names
@@ -85,13 +84,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Setting up the NodeJS environment
         uses: ./syllograph/.github/actions/syllograph-setup-node-environment
         with:
@@ -112,13 +112,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Setting up the NodeJS environment
         uses: ./syllograph/.github/actions/syllograph-setup-node-environment
         with:
@@ -144,13 +145,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Building the source code of the project and uploading the artifacts
         uses: ./syllograph/.github/actions/syllograph-build-project
         with:
@@ -174,13 +176,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Downloading the generated artifacts of the project
         uses: actions/download-artifact@master
         with:
@@ -206,13 +209,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Setting up the AWS CLI
         uses: ./syllograph/.github/actions/syllograph-setup-aws-cli
         with:
@@ -236,13 +240,14 @@ jobs:
     steps:
       - name: Cloning the repository
         uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEYS }}
       - uses: actions/checkout@v3
         with:
           repository: efsw/efsw.syllograph
           ref: v1.1.0
           path: syllograph
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEYS }}
-          persist-credentials: true
       - name: Purging the artifacts
         uses: ./syllograph/.github/actions/syllograph-purge-artifacts
         with:
