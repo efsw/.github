@@ -200,6 +200,7 @@ jobs:
           plugin_name: ${{ needs.generate-resources-names.outputs.plugin_name }}
           plugin_target_reference_name: ${{ needs.generate-resources-names.outputs.plugin_target_reference_name }}
           environment_name: ${{ needs.generate-resources-names.outputs.environment_name }}
+          product_name: ${{ inputs.product_name }}
           skip_plugin: ${{ inputs.skip_plugin }}
           skip_relay: ${{ inputs.skip_relay }}
 
